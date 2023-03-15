@@ -106,8 +106,7 @@ public class PedidoService {
     }
 
     private void copyDtoToEntity(PedidoDTO dto, Pedido entity) {
-
-        if (dto.getValorTotal() != null) entity.setValorTotal(dto.getValorTotal());
+        entity.setValorTotal(dto.getValorTotal());
 
         Optional<Lanche> lanche = lancheRepository.findById(dto.getLanche().getId());
         entity.setLanche(lanche.get());
