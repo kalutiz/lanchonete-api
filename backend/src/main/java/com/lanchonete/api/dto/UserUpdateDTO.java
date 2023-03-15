@@ -1,14 +1,14 @@
 package com.lanchonete.api.dto;
 
-import com.lanchonete.api.services.validation.UserInsertValid;
+import com.lanchonete.api.services.validation.UserUpdateValid;
 
-@UserInsertValid
-public class UserInsertDTO extends UserDTO {
+@UserUpdateValid
+public class UserUpdateDTO extends UserDTO {
     private static final long serialVersionUID = 1L;
 
     private String password;
 
-    public UserInsertDTO() {
+    UserUpdateDTO() {
         super();
     }
 

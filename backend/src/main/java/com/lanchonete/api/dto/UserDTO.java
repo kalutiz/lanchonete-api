@@ -2,21 +2,23 @@ package com.lanchonete.api.dto;
 
 import com.lanchonete.api.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    Set<RoleDTO> roles = new HashSet<>();
     private Long id;
+    @Email(message = "Colocar email válido")
     private String email;
+    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
 
-    Set<RoleDTO> roles = new HashSet<>();
-
-    public UserDTO(){
+    public UserDTO() {
     }
 
     public UserDTO(Long id, String email, String firstName, String lastName) {

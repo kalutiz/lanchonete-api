@@ -3,6 +3,7 @@ package com.lanchonete.api.services;
 import com.lanchonete.api.dto.RoleDTO;
 import com.lanchonete.api.dto.UserDTO;
 import com.lanchonete.api.dto.UserInsertDTO;
+import com.lanchonete.api.dto.UserUpdateDTO;
 import com.lanchonete.api.entities.Role;
 import com.lanchonete.api.entities.User;
 import com.lanchonete.api.repositories.RoleRepository;
@@ -56,10 +57,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getReferenceById(id);
             copyDtoToEntity(dto, entity);
+            entity.setPassword(codificadorDeSenha.encode(dto.getPassword()));
             entity = repository.save(entity);
             return new UserDTO(entity);
         } catch (EntityNotFoundException e) {
