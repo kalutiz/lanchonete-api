@@ -1,7 +1,6 @@
 package com.lanchonete.api.dto;
 
 import com.lanchonete.api.entities.ItemPedido;
-import com.lanchonete.api.entities.Pedido;
 
 import java.io.Serializable;
 
@@ -26,10 +25,12 @@ public class ItemPedidoDTO implements Serializable {
         this.precoIngrediente = entity.getPrecoIngrediente();
     }
 
-    public ItemPedidoDTO(ItemPedido entity, Pedido pedido) {
-        this(entity);
-        this.pedido = new PedidoDTO(pedido);
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public PedidoDTO getPedido() {
@@ -38,14 +39,6 @@ public class ItemPedidoDTO implements Serializable {
 
     public void setPedido(PedidoDTO pedido) {
         this.pedido = pedido;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public IngredienteDTO getIngrediente() {

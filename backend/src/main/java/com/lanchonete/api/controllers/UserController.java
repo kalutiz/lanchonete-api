@@ -1,7 +1,8 @@
 package com.lanchonete.api.controllers;
 
-import com.lanchonete.api.dto.ItemPedidoDTO;
-import com.lanchonete.api.services.ItemPedidoService;
+import com.lanchonete.api.dto.UserDTO;
+import com.lanchonete.api.dto.UserInsertDTO;
+import com.lanchonete.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,33 +13,33 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/itempedido")
-public class ItemPedidoController {
+@RequestMapping(value = "/users")
+public class UserController {
 
     @Autowired
-    private ItemPedidoService service;
+    private UserService service;
 
     @GetMapping
-    public ResponseEntity<Page<ItemPedidoDTO>> findAll(Pageable pageable) {
-        Page<ItemPedidoDTO> list = service.findAllPaged(pageable);
+    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
+        Page<UserDTO> list = service.findAllPaged(pageable);
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ItemPedidoDTO> findById(@PathVariable Long id) {
-        ItemPedidoDTO dto = service.findById(id);
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        UserDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<ItemPedidoDTO> insert(@RequestBody ItemPedidoDTO dto) {
-        dto = service.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        return ResponseEntity.created(uri).body(dto);
+    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto) {
+        UserDTO novoDto = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(novoDto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ItemPedidoDTO> update(@PathVariable Long id, @RequestBody ItemPedidoDTO dto) {
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok().body(dto);
     }
@@ -48,4 +49,5 @@ public class ItemPedidoController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 }
