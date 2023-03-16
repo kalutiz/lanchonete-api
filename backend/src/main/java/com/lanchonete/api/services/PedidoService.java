@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -108,8 +109,12 @@ public class PedidoService {
     private void copyDtoToEntity(PedidoDTO dto, Pedido entity) {
         entity.setValorTotal(dto.getValorTotal());
 
-        Optional<Lanche> lanche = lancheRepository.findById(dto.getLanche().getId());
-        entity.setLanche(lanche.get());
+        try {
+            Optional<Lanche> lanche = lancheRepository.findById(dto.getLanche().getId());
+            entity.setLanche(lanche.get());
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException("Lanche não encontrado: " + dto.getLanche().getId());
+        }
     }
 
 }

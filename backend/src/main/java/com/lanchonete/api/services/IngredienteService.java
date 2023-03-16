@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +44,19 @@ public class IngredienteService {
         entity.setPreco(dto.getPreco());
         entity = repository.save(entity);
         return new IngredienteDTO(entity);
+    }
+
+    @Transactional
+    public List<IngredienteDTO> insertList(List<IngredienteDTO> dtos) {
+        List<IngredienteDTO> dtoList = new ArrayList<>();
+        for (IngredienteDTO dto : dtos) {
+            Ingrediente entity = new Ingrediente();
+            entity.setNome(dto.getNome());
+            entity.setPreco(dto.getPreco());
+            entity = repository.save(entity);
+            dtoList.add(new IngredienteDTO(entity));
+        }
+        return dtoList;
     }
 
     @Transactional

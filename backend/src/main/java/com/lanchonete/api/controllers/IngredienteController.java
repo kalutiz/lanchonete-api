@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/ingredientes")
@@ -36,6 +37,13 @@ public class IngredienteController {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @PostMapping("/lista")
+    public ResponseEntity<List<IngredienteDTO>> insertList(@Valid @RequestBody List<IngredienteDTO> dtos) {
+        List<IngredienteDTO> dtoList = service.insertList(dtos);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+        return ResponseEntity.created(uri).body(dtoList);
     }
 
     @PutMapping(value = "/{id}")
