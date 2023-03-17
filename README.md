@@ -78,6 +78,8 @@ docker build -f [ Caminho do arquivo.dockerfile ] -t postgres-dslanchonete:lates
 
 docker run --name postgres-dslanchonete -p 5432:5432 -d postgres-dslanchonete
 
+</br>
+
 Com o terminal aberto acesse a pasta work e execute o comando: java -jar application.jar
 
 </br>
