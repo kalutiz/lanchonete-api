@@ -72,6 +72,16 @@ Todos arquivos necessários para instalação e gerenciamento já estão na past
 
 </br>
 
+Abra o terminal na pasta \work\docker_db e execute os seguintes comandos para instalar o banco de dados:
+
+docker build -f [ Caminho do arquivo.dockerfile ] -t postgres-dslanchonete:latest .
+
+docker run --name postgres-dslanchonete -p 5432:5432 -d postgres-dslanchonete
+
+Com o terminal aberto acesse a pasta work e execute o comando: java -jar application.jar
+
+</br>
+
 Variáveis utilizadas
 
 ![image](https://user-images.githubusercontent.com/84253307/225777315-7f62bd10-9663-4111-9151-95fd3f46083d.png)
